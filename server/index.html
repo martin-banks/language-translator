@@ -1,0 +1,22 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>Hello world</h1>
+	<button>SEND!!</button>
+	<p class="msg"></p>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const button = document.querySelector('button')
+const container = document.querySelector('.msg')
+const socket = io()
+
+socket.on('reply', data => container.innerHTML = data.msg)
+button.addEventListener('click', e => {
+	socket.emit('send', { msg: 'Hello world, please translate this into a foriegn language' })
+})
+</script>
+</html>
