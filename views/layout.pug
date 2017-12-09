@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title Martin Banks
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		link(rel='stylesheet' href='/public/styles/app.css')
+		block fonts
+			//- include partial/fonts.pug
+		
+	body
+		div(style= `background: ${gradient}`).gradient
+			div(data-highlight="circle").highlight__circle
+
+		block header
+			//- include partials/nav.pug
+					
+		section.content
+			pre Languages loading
+			block content
+				div.card
+					p nothing to see here
+
+		block footer
+			//- include partial/footer.pug
+
+		block scripts
+			script(src="/public/socket.io.js")
+			script(src="/public/app.js")
