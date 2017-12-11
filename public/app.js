@@ -31,7 +31,8 @@ function createLanguageList({ data, type }) {
 	const list = items => `<select name="languages" id="kanguages">${items}</select>`
 	const item = value => `<option value="${value.code}">${value.name}</option>`
 	const output = list(data.map(d => item(d)).join(''))
-	return ` Choose language ${type}: ${output}`
+	return `<h2>Choose language</h2>
+		 ${output}`
 }
 
 function setTranslation(data) {

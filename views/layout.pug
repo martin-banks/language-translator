@@ -4,26 +4,22 @@ html(lang="en")
 		meta(charset="UTF-8")
 		title Martin Banks
 		meta(name="viewport" content="width=device-width, initial-scale=1")
-		link(rel='stylesheet' href='/public/styles/app.css')
+		link(rel='stylesheet' href='/public/app.css')
 		block fonts
 			//- include partial/fonts.pug
 		
 	body
-		div(style= `background: ${gradient}`).gradient
-			div(data-highlight="circle").highlight__circle
-
 		block header
 			//- include partials/nav.pug
 					
-		section.content
-			block content
-				div.languages__to Languages loading
-				button.listen Listen to me
+		section.wrapper
+			div.content
+				block content
+					div.translator
+						div.languages__to Languages loading
+						button.listen Start translating
 
-				//- input(type="text")
-				//- button.translateButton Translate
-
-				p.translation
+						p.translation
 
 
 		block footer
