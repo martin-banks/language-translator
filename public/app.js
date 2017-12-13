@@ -12,7 +12,6 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 
 const synth = window.speechSynthesis
 
-
 let speech = null
 let voices = []
 
