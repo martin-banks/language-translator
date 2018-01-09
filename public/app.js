@@ -27,7 +27,7 @@ listen.addEventListener('click', e => {
 
 
 function createLanguageList({ data, type }) {
-	const list = items => `<select name="languages" id="kanguages">${items}</select>`
+	const list = items => `<select name="languages" id="languages">${items}</select>`
 	const item = value => `<option value="${value.code}">${value.name}</option>`
 	const output = list(data.map(d => item(d)).join(''))
 	return `<h2>Choose language</h2>
@@ -38,9 +38,16 @@ function setTranslation(data) {
 	const { msg } = data
 	const talk = new SpeechSynthesisUtterance(msg)
 	voices = synth.getVoices()
-	const voiceToUse = voices
-		.filter(v => v.lang.split('-')[0] === languageTo())[0]
+	let voiceToUse = voices
+		.filter(v => v.lang.split('-').map(x => x.toLowerCase()).includes(languageTo().toLowerCase()))[0]
+		// .filter(v => v.lang.split('-')[0].toLowerCase() === languageTo().toLowerCase())[0]
 		// .forEach(v => console.log(v.lang))
+	// voices.forEach(v => console.log(v.lang.split('-')))
+	// if (!voiceToUse) {
+	// 	voiceToUse = voices
+	// 		.filter(v => v.lang.split('-')[1].toLowerCase() === languageTo().toLowerCase())[0]
+	// }
+	console.log({ voices, voiceToUse }, languageTo())
 	talk.voice = voiceToUse
 	synth.speak(talk)
 	// let suffix = ''
