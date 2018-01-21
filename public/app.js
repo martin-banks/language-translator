@@ -33,15 +33,9 @@ listen.addEventListener('click', e => {
 
 
 function createLanguageList({ data, type }) {
-// <<<<<<< HEAD
-	const list = items => `<select name="languages" id="languages">${items}</select>`
-	const item = value => `<option value="${value.code}">${value.name}</option>`
-	const output = list(data.map(d => item(d)).join(''))
-// =======
-	// var list = items => `<select name="languages" id="languages">${items}</select>`
-	// var item = value => `<option value="${value.code}">${value.name}</option>`
-	// var output = list(data.map(d => item(d)).join(''))
-// >>>>>>> 1a5c1f5860e495d1495de2f3461e975c49a7dc75
+	var list = items => `<select name="languages" id="languages">${items}</select>`
+	var item = value => `<option value="${value.code}">${value.name}</option>`
+	var output = list(data.map(d => item(d)).join(''))
 	return `<h2>Choose language</h2>
 		 ${output}`
 }
@@ -50,17 +44,8 @@ function setTranslation(data) {
 	var { msg } = data
 	var talk = new SpeechSynthesisUtterance(msg)
 	voices = synth.getVoices()
-// <<<<<<< HEAD
-	let voiceToUse = voices
-		.filter(v => v.lang.split('-')
-			.map(x => x.toLowerCase())
-			.includes(languageTo().toLowerCase())
-		)[0]
-		// .filter(v => v.lang.split('-')[0].toLowerCase() === languageTo().toLowerCase())[0]
-// =======
-// 	var voiceToUse = voices
-// 		.filter(v => v.lang.split('-')[0] === languageTo())[0]
-// >>>>>>> 1a5c1f5860e495d1495de2f3461e975c49a7dc75
+	var voiceToUse = voices
+		.filter(v => v.lang.split('-')[0] === languageTo())[0]
 		// .forEach(v => console.log(v.lang))
 	// voices.forEach(v => console.log(v.lang.split('-')))
 	// if (!voiceToUse) {
