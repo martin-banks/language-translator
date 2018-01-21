@@ -12,14 +12,21 @@ html(lang="en")
 		block header
 			//- include partials/nav.pug
 					
-		section.wrapper
+		section#app.wrapper
 			div.content
 				block content
 					div.translator
+						div.header
+							h1 Project babelfish
+							p Okay, not an original name but here is my simple language translator
+							p Choose you language, hit the button and then talk... the translation will be played back and printed out
 						div.languages__to Languages loading
-						button.listen Start translating
+						div.listenButton.listen
+							//- img(src="/public/circle.svg")
+							img(src="/public/mic.svg")
+						//- button.listen Start translating
 
-						p.translation
+						p.italic.translation
 
 
 		block footer
