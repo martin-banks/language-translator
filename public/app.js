@@ -1,16 +1,22 @@
 
-// const translateButton = document.querySelector('.translateButton')
-// const message = () => document.querySelector('input').value
-const languageToList = document.querySelector('.languages__to')
-const translation = document.querySelector('.translation')
-const listen = document.querySelector('.listen')
-const languageTo = () => languageToList.querySelector('select').value
-const socket = io()
+function isMobile() {
+	return /iPad|Android|webOS|iPhone|iPod|Blackberry/.test(navigator.userAgent) && !window.MSStream;
+}
+
+document.querySelector('section#app').setAttribute('data-mobile', isMobile())
+
+// var translateButton = document.querySelector('.translateButton')
+// var message = () => document.querySelector('input').value
+var languageToList = document.querySelector('.languages__to')
+var translation = document.querySelector('.translation')
+var listen = document.querySelector('.listen')
+var languageTo = () => languageToList.querySelector('select').value
+var socket = io()
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
-const synth = window.speechSynthesis
+var synth = window.speechSynthesis
 
 let speech = null
 let voices = []
@@ -19,7 +25,7 @@ listen.addEventListener('click', e => {
 	speech = new SpeechRecognition()
 	speech.start()
 	speech.addEventListener('result', e => {
-		const msg = e.results[0][0].transcript
+		var msg = e.results[0][0].transcript
 		console.log(msg)
 		socket.emit('translate', { msg, to: languageTo() })
 	})
@@ -27,20 +33,34 @@ listen.addEventListener('click', e => {
 
 
 function createLanguageList({ data, type }) {
+// <<<<<<< HEAD
 	const list = items => `<select name="languages" id="languages">${items}</select>`
 	const item = value => `<option value="${value.code}">${value.name}</option>`
 	const output = list(data.map(d => item(d)).join(''))
+// =======
+	// var list = items => `<select name="languages" id="languages">${items}</select>`
+	// var item = value => `<option value="${value.code}">${value.name}</option>`
+	// var output = list(data.map(d => item(d)).join(''))
+// >>>>>>> 1a5c1f5860e495d1495de2f3461e975c49a7dc75
 	return `<h2>Choose language</h2>
 		 ${output}`
 }
 
 function setTranslation(data) {
-	const { msg } = data
-	const talk = new SpeechSynthesisUtterance(msg)
+	var { msg } = data
+	var talk = new SpeechSynthesisUtterance(msg)
 	voices = synth.getVoices()
+// <<<<<<< HEAD
 	let voiceToUse = voices
-		.filter(v => v.lang.split('-').map(x => x.toLowerCase()).includes(languageTo().toLowerCase()))[0]
+		.filter(v => v.lang.split('-')
+			.map(x => x.toLowerCase())
+			.includes(languageTo().toLowerCase())
+		)[0]
 		// .filter(v => v.lang.split('-')[0].toLowerCase() === languageTo().toLowerCase())[0]
+// =======
+// 	var voiceToUse = voices
+// 		.filter(v => v.lang.split('-')[0] === languageTo())[0]
+// >>>>>>> 1a5c1f5860e495d1495de2f3461e975c49a7dc75
 		// .forEach(v => console.log(v.lang))
 	// voices.forEach(v => console.log(v.lang.split('-')))
 	// if (!voiceToUse) {
@@ -51,14 +71,12 @@ function setTranslation(data) {
 	talk.voice = voiceToUse
 	synth.speak(talk)
 	// let suffix = ''
-	// const suffixTemplate = value => `<p>${value}</p>`
+	// var suffixTemplate = value => `<p>${value}</p>`
 	// if (msg.toLowerCase() === message().toLowerCase()) {
 	// 	suffix = suffixTemplate('Hmm, looks like it\'s the same, did you set the correct language?')
 	// }
 	translation.innerHTML = `${msg}`
 }
-
-
 
 
 // translateButton.addEventListener('click', e => {
