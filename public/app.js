@@ -69,6 +69,7 @@ function setTranslation(data) {
 socket.on('languages', data => {
 	languageToList.innerHTML = createLanguageList({ data: data.languages, type: 'to' })
 	languageToList.querySelector('select').value = 'en'
+	console.log({ data })
 })
 socket.on('translation', setTranslation)
 

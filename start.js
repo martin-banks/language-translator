@@ -17,7 +17,7 @@ const projectId = process.env.PROJECT
 const keyFilename = process.env.KEYFILE
 const port = 3000
 http.listen(port, function(){
-  console.log(`listening on *: ${port}`);
+	console.log(`listening on *: ${port}`);
 });
 
 // Create new translate instance
