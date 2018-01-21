@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "start.js",
+  "now": {
+    "env": "variables.env.now",
+    "keyfile": "keyfilename-language-translator-84df5a4bdac7.json"
+  },
   "scripts": {
     "dev": "nodemon start.js",
     "start": "node start.js"
