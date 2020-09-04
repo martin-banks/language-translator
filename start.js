@@ -1,4 +1,3 @@
-/* eslint-disable */
 require('dotenv').config()
 // const google = require('googleapis')
 const Translate = require('@google-cloud/translate')
@@ -15,10 +14,10 @@ const path = require('path')
 const projectId = process.env.PROJECT
 // const key = process.env.TRANSLATE
 const keyFilename = process.env.KEYFILE
-const port = 3000
-http.listen(port, function(){
-	console.log(`listening on *: ${port}`);
-});
+const port = process.env.PORT || 3000
+http.listen(port, () => {
+  console.log(`listening on *: ${port}`)
+})
 
 // Create new translate instance
 // This is what we'll call later to access translate api
@@ -34,7 +33,7 @@ app.use('/public', express.static(path.join(__dirname, '/public')))
 
 // Variables to pass into templates for all route requests
 app.use((req, res, next) => {
-	next()
+  next()
 })
 
 // app.listen(3000, () => console.log('Example app listening on port 3000!'))
@@ -43,29 +42,29 @@ app.get('/', (req, res) => res.render('layout'))
 
 // Start socket.io connection
 io.on('connection', function (socket) {
-	// when a user connects, get a list of languages available to translate ...
-	translate
-		.getLanguages()
-		.then(data => {
-			// ... and return it back to client
-			socket.emit('languages', { languages: data[0] })
-		})
-		.catch(console.error)
-	
-	// Start listening for 'send' events
-	// This event is used by the client to send messages to translate
+  // when a user connects, get a list of languages available to translate ...
+  translate
+    .getLanguages()
+    .then(data => {
+      // ... and return it back to client
+      socket.emit('languages', { languages: data[0] })
+    })
+    .catch(console.error)
+  
+  // Start listening for 'send' events
+  // This event is used by the client to send messages to translate
   socket.on('translate', data => {
-  	// send the message to the tanslate api
-  	translate
-			.translate(data.msg, data.to)
-			.then(res => {
-				console.log(res[0])
-				// return the translated 
-		  	socket.emit('translation', { msg: res[0] })
-			})
-			.catch(err => {
-				console.error('ERROR!!', err)
-			})
+    // send the message to the tanslate api
+    translate
+      .translate(data.msg, data.to)
+      .then(res => {
+        console.log(res[0])
+        // return the translated 
+        socket.emit('translation', { msg: res[0] })
+      })
+      .catch(err => {
+        console.error('ERROR!!', err)
+      })
   })
 })
 
